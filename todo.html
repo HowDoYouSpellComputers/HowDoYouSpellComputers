@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <link rel="shortcut icon" href="icon.png" type="image/x-icon" />
+        <title>ToDo List</title>
+        <script>
+            function addItem() {
+                var newItem = document.createElement("div");
+                newItem.innerHTML = document.getElementById("text").value;
+                newItem.onclick = removeItem;
+                document.getElementById("list").appendChild(newItem)
+                saveList();
+            }
+            function removeItem() {
+                document.getElementById("list").removeChild(this);
+                saveList();
+            }
+            function saveList() {
+                localStorage.storedList = document.getElementById("list").innerHTML;
+            }
+            function loadList() {
+                document.getElementById("list").innerHTML = localStorage.storedList;
+            }
+        </script>
+    </head>
+    <body>
+        <a href="index.html">Home</a>
+        <input type="text" name="text" id="text" value="Type here to add task" />
+        <br>
+        <input type="button" name="button" id="button" value="Add" onclick="addItem();" />
+        <div id="list"></div>
+        <script>
+            if(localStorage.storedList) {
+                loadList();
+            }
+        </script>
+    </body>
+</html>
